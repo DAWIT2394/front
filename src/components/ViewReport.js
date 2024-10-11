@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const ViewReport = () => {
+  const [searchName, setSearchName] = useState('');
+  const [searchEmail, setSearchEmail] = useState('');
   const [reportData, setReportData] = useState({
     reportedBy: 'John Doe',
     email: 'johndoe@example.com',
@@ -12,6 +14,7 @@ const ViewReport = () => {
       { type: 'image', name: 'Screenshot.png', url: '/path/to/screenshot.png' },
       { type: 'doc', name: 'Document.docx', url: '/path/to/document.docx' },
     ],
+    
   });
 
   const bookedLoads = [
@@ -97,63 +100,96 @@ const ViewReport = () => {
     }
   };
 
+  // Check if the report matches the search criteria
+  const matchesSearch = (data) => {
+    const nameMatches = data.reportedBy.toLowerCase().includes(searchName.toLowerCase());
+    const emailMatches = data.email.toLowerCase().includes(searchEmail.toLowerCase());
+    return nameMatches && emailMatches;
+  };
+
   return (
-    <div className="flex pt-20">  {/* Tailwind has pt-5 which gives 20px padding */}
+    <div className="flex pt-20">
 
       {/* Left sidebar for button */}
       <div className="w-1/5 bg-gray-100 p-4">
-
-<Link to="/dashboard">
-  <button className="bg-green-600 text-white px-4 py-2 rounded-lg w-full mb-4">
-    Total Load Boooked
-  </button>
-</Link>
-
+        <Link to="/dashboard">
+          <button className="bg-green-600 text-white px-4 py-2 rounded-lg w-full mb-4">
+            Total Load Booked
+          </button>
+        </Link>
       </div>
 
       {/* Main content area */}
       <div className="w-4/5 max-w-2xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-bold text-center mb-6">Report Details</h2>
+
+        {/* Search Inputs */}
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Search by Name"
+            value={searchName}
+            onChange={(e) => setSearchName(e.target.value)}
+            className="border rounded-md p-2 w-full mb-2"
+          />
+          <input
+            type="text"
+            placeholder="Search by Email"
+            value={searchEmail}
+            onChange={(e) => setSearchEmail(e.target.value)}
+            className="border rounded-md p-2 w-full"
+          />
+        </div>
+
+        {/* Report Display */}
+        {matchesSearch(reportData) && (
+          <>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold">Reported By:</label>
+              <p className="text-gray-600">{reportData.reportedBy}</p>
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold">Email:</label>
+              <p className="text-gray-600">{reportData.email}</p>
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold">Phone Number:</label>
+              <p className="text-gray-600">{reportData.phoneNumber}</p>
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold">Team Leader Name:</label>
+              <p className="text-gray-600">{reportData.teamLeaderName}</p>
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold">Total Booked Loads:</label>
+              <p className="text-gray-600">Daily: {loadCounts.daily}</p>
+              <p className="text-gray-600">Weekly: {loadCounts.weekly}</p>
+              <p className="text-gray-600">Monthly: {loadCounts.monthly}</p>
+              <p className="text-gray-600">Yearly: {loadCounts.yearly}</p>
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold">Attached Files:</label>
+              <ul className="list-disc ml-6">
+                {reportData.files.map((file, index) => (
+                  <li key={index}>
+                    <span>{file.name} - </span>
+                    {renderFileLink(file)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
         
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold">Reported By:</label>
-          <p className="text-gray-600">{reportData.reportedBy}</p>
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold">Email:</label>
-          <p className="text-gray-600">{reportData.email}</p>
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold">Phone Number:</label>
-          <p className="text-gray-600">{reportData.phoneNumber}</p>
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold">Team Leader Name:</label>
-          <p className="text-gray-600">{reportData.teamLeaderName}</p>
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold">Total Booked Loads:</label>
-          <p className="text-gray-600">Daily: {loadCounts.daily}</p>
-          <p className="text-gray-600">Weekly: {loadCounts.weekly}</p>
-          <p className="text-gray-600">Monthly: {loadCounts.monthly}</p>
-          <p className="text-gray-600">Yearly: {loadCounts.yearly}</p>
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold">Attached Files:</label>
-          <ul className="list-disc ml-6">
-            {reportData.files.map((file, index) => (
-              <li key={index}>
-                <span>{file.name} - </span>
-                {renderFileLink(file)}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {/* No results message */}
+        {!matchesSearch(reportData) && (searchName || searchEmail) && (
+          <p className="text-red-500 text-center">No results found for your search.</p>
+        )}
       </div>
     </div>
   );
