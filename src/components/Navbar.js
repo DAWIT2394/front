@@ -28,7 +28,7 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-4">
           <Link to="/" className="text-green px-4 hover:underline">Home</Link>
           <Link to="/authform" className="text-green px-4 hover:underline">Admin Dashboard</Link>
-          <Link to="/team-leader" className="text-green px-4 hover:underline">Team Leader Dashboard</Link>
+          <Link to="/authform" className="text-green px-4 hover:underline">Team Leader Dashboard</Link>
           <Link to="/employee" className="text-green px-4 hover:underline">Employee Dashboard</Link>
         </div>
 
@@ -52,7 +52,7 @@ const Navbar = () => {
           <Link to="/admin" className="block text-green hover:underline" onClick={closeMenu}>
             Admin Dashboard
           </Link>
-          <Link to="/team-leader" className="block text-green hover:underline" onClick={closeMenu}>
+          <Link to="/authForm" className="block text-green hover:underline" onClick={closeMenu}>
             Team Leader Dashboard
           </Link>
           <Link to="/employee" className="block text-green hover:underline" onClick={closeMenu}>

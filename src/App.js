@@ -8,6 +8,8 @@ import Home from './components/Home';
 import AuthForm from './components/AuthForm';
 import TeamLeaderForm from './components/TeamLeaderForm';
 import ManageUsers from './components/ManageUsers';
+import ViewReport from './components/ViewReport';
+import Dashboard from './components/Dashboard';
 function App() {
   return (
     <Router>
@@ -20,6 +22,13 @@ function App() {
           <Route path="/authform" element={<AuthForm />} />
           <Route path="/teamleaderform" element={<TeamLeaderForm />} />
           <Route path="/ManageUsers" element={<AdminDashboard />} />
+          <Route path="/authForm" element={<TeamLeaderDashboard />} />
+          <Route path="/viewReport" element={<ViewReport />} />
+          <Route path="/Dashboard/" element={<Dashboard />} />
+
+
+
+
 
 
           <Route path="/" element={<Home/>  } />
