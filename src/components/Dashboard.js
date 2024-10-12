@@ -3,10 +3,10 @@ import TotalLoadChart from './TotalLoadChart.js'; // Import the chart component
 
 const Dashboard = () => {
   const [loadCounts, setLoadCounts] = useState({
-    daily: 10,
-    weekly: 70,
-    monthly: 300,
-    yearly: 3500,
+    daily: 500,
+    weekly: 700,
+    monthly: 5000,
+    yearly: 10000,
   });
 
   // You can update loadCounts with real data fetched from an API or your state

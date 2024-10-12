@@ -17,11 +17,11 @@ const ManageUsers = () => {
 <button className="bg-gray-500 text-white px-4 py-2 rounded ml-2">view Report</button>
 
 </Link>
-<Link to="/TeamLeaderForm">
+<Link to="/ViewEmployees">
 <button className="bg-green-500 text-white px-4 py-2 rounded ml-2">view Employee</button>
 
 </Link>
-<Link to="/TeamLeaderForm">
+<Link to="/ViewTeamLeaderDashboard">
 <button className="bg-green-500 text-white px-4 py-2 rounded ml-2">view Team Leader</button>
 
 </Link>

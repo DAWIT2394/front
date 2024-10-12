@@ -10,6 +10,8 @@ import TeamLeaderForm from './components/TeamLeaderForm';
 import ManageUsers from './components/ManageUsers';
 import ViewReport from './components/ViewReport';
 import Dashboard from './components/Dashboard';
+import ViewTeamLeaderDashboard from './components/viewTeamLeaderDashboard';
+import ViewEmployees from './components/ViewEmployees';
 function App() {
   return (
     <Router>
@@ -25,6 +27,10 @@ function App() {
           <Route path="/authForm" element={<TeamLeaderDashboard />} />
           <Route path="/viewReport" element={<ViewReport />} />
           <Route path="/Dashboard/" element={<Dashboard />} />
+          <Route path="/ViewTeamLeaderDashboard/" element={<ViewTeamLeaderDashboard />} />
+          <Route path="/ViewEmployees/" element={<ViewEmployees />} />
+
+
 
 
 
